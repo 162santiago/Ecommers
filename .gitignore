@@ -17,3 +17,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+admin-template
+/public/backend/assets/modules
+/public/backend/assets/img
+/public/backend/assets/fonts
+
+
