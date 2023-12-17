@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -47,7 +48,7 @@
     DASHBOARD START
   ==============================-->
   @yield('content')
-  
+
   <!--=============================
     DASHBOARD START
   ==============================-->
@@ -64,6 +65,10 @@
   ==============================-->
 
 
+
+
+    <!--toast -->
+ <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.cjs"></script>
   <!--jquery library js-->
   <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
   <!--bootstrap js-->
@@ -89,8 +94,8 @@
   <script src="{{ asset('frontend/js/multiple-image-video.js') }}"></script>
   <!--sticky sidebar js-->
   <script src="{{ asset('frontend/js/sticky_sidebar.js') }}"></script>
-  <!--price ranger js-->
   <script src="{{ asset('frontend/js/ranger_jquery-ui.min.js') }}"></script>
+  <!--price ranger js-->
   <script src="{{ asset('frontend/js/ranger_slider.js') }}"></script>
   <!--isotope js-->
   <script src="{{ asset('frontend/js/isotope.pkgd.min.js') }}"></script>
@@ -102,4 +107,13 @@
   <script src="{{ asset('frontend/js/main.js') }}"></script>
 </body>
 
+  <script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error("{{$error}}")
+        @endforeach
+    @endif
+
+
+    </script>
 </html>
