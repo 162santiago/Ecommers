@@ -16,41 +16,37 @@
                             <h4>Create Slider</h4>
                         </div>
                         <div class="card-body">
-                            <form action="">
+                            <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="">Type</label>
-                                    <input type="file" placeholder="" name="" class="form-control">
+                                <div class="form-group" >
+                                    <label for="">Banner</label>
+                                    <input type="file" placeholder="" name="banner" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Type</label>
-                                    <input type="text" placeholder="" name="" class="form-control">
+                                    <input type="text" placeholder="" name="type" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Title</label>
-                                    <input type="text" placeholder="" name="" class="form-control">
+                                    <input type="text" placeholder="" name="title" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Starting Price</label>
-                                    <input type="text" placeholder="" name="" class="form-control">
+                                    <input type="text" placeholder="" name="starting_price" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Button Url</label>
-                                    <input type="text" placeholder="" name="" class="form-control">
+                                    <input type="text" placeholder="" name="btn_url" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Serial</label>
-                                    <input type="text" placeholder="" name="" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for=""></label>
-                                    <input type="text" placeholder="" name="" class="form-control">
+                                    <input type="text" placeholder="" name="serial" class="form-control">
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="">Status</label>
-                                    <select name="" id="">
-                                        <option value="">Active</option>
-                                        <option value="">Inacive</option>
+                                    <select id="" name="status">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inacive</option>
                                     </select>
                                 </div>
 
