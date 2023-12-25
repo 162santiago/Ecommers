@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Slider;
+use File;
 use Illuminate\Http\Request;
 
 class SliderController extends Controller
@@ -32,7 +34,33 @@ class SliderController extends Controller
             'banner' => ['required', 'image', 'max:2000'],
             'type' => ['string', 'max:200'],
             'title' => ['required', 'max:200'],
-            'starting_price' => ['max:200'] ]);
+            'starting_price' => ['max:200'],
+            'btn_url' => ['nullable', 'url'],
+            'serial' =>['required'],
+            'status' => ['required']
+         ]);
+
+         $slider = new Slider();
+         if ($request->hasFile('banner')) {
+            if (File::exists(public_path($slider->banner))) {
+                File::delete(public_path($slider->banner));
+            }
+            $image = $request->banner;
+            $imageName = rand(). '_'. $image->getClientOriginalName();
+            $image->move(public_path('image'), $imageName);
+            $path = '/image/'. $imageName;
+            $slider->banner = $path;
+         }
+
+         $slider->type = $request->type;
+         $slider->title = $request->title;
+         $slider->starting_price = $request->starting_price;
+         $slider->btn_url = $request->btn_url;
+         $slider->serial = $request->serial;
+         $slider->status = $request->status;
+         $slider->save();
+         toastr()->success('Create Successfull');
+         return redirect()->back();
     }
 
     /**
