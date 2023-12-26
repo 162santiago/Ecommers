@@ -22,7 +22,14 @@ class SliderDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'slider.action')
+            ->addColumn('action', function($query){
+                 $btnEdit = "<a class='btn btn-primary ml-1' href='".route('admin.slider.edit', $query->id)."'><i class='far fa-edit'></i></a>";
+                 $btnDelete = "<a class='btn btn-danger' href='".route('admin.slider.destroy', $query->id)."'><i class='fa-solid fa-trash'></i></a>";
+                 return $btnEdit . $btnDelete;
+            })
+            ->addColumn('banner', function($query){
+                return $img = "<img width='100px' src='".asset($query->banner)."'> </img>";
+            })->rawColumns(['banner', 'action'])
             ->setRowId('id');
     }
 
@@ -62,15 +69,16 @@ class SliderDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('id')->width(100),
+            Column::make('banner')->width(200),
+            Column::make('title'),
+            Column::make('starting_price'),
+            Column::make('type'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(90)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 

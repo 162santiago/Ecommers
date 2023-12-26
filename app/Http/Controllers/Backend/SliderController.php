@@ -73,7 +73,8 @@ class SliderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $slider = Slider::find($id);
+
     }
 
     /**
@@ -89,6 +90,9 @@ class SliderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd('aa');
+        Slider::find($id)->delete();
+        toastr()->success('Slider delete');
+        return redirect()->back();
     }
 }
