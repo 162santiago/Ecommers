@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\SliderDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
+use App\Traits\ImageUploadTrait;
 use File;
 use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SliderDataTable $dataTable)
     {
-        return view('admin.slider.index');
+        return $dataTable->render('admin.slider.index');
     }
 
     /**
@@ -36,31 +39,25 @@ class SliderController extends Controller
             'title' => ['required', 'max:200'],
             'starting_price' => ['max:200'],
             'btn_url' => ['nullable', 'url'],
-            'serial' =>['required'],
+            'serial' => ['required'],
             'status' => ['required']
-         ]);
+        ]);
 
-         $slider = new Slider();
-         if ($request->hasFile('banner')) {
-            if (File::exists(public_path($slider->banner))) {
-                File::delete(public_path($slider->banner));
-            }
-            $image = $request->banner;
-            $imageName = rand(). '_'. $image->getClientOriginalName();
-            $image->move(public_path('image'), $imageName);
-            $path = '/image/'. $imageName;
-            $slider->banner = $path;
-         }
+        $slider = new Slider();
+        //  Carga de imagen
+        $bannerPath = $this->uploadImage($request, 'banner', 'image');
 
-         $slider->type = $request->type;
-         $slider->title = $request->title;
-         $slider->starting_price = $request->starting_price;
-         $slider->btn_url = $request->btn_url;
-         $slider->serial = $request->serial;
-         $slider->status = $request->status;
-         $slider->save();
-         toastr()->success('Create Successfull');
-         return redirect()->back();
+
+        $slider->banner = $bannerPath;
+        $slider->type = $request->type;
+        $slider->title = $request->title;
+        $slider->starting_price = $request->starting_price;
+        $slider->btn_url = $request->btn_url;
+        $slider->serial = $request->serial;
+        $slider->status = $request->status;
+        $slider->save();
+        toastr()->success('Create Successfull');
+        return redirect()->back();
     }
 
     /**

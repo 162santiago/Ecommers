@@ -90,7 +90,6 @@
 
   <!-- Page Specific JS File -->
   {{-- <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script> --}}
-
   <!-- Template JS File -->
   <script src="{{asset('backend/assets/js/scripts.js')}}"></script>
   <script src="{{asset('backend/assets/js/custom.js')}}"></script>
