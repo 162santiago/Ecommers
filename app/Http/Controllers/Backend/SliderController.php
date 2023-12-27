@@ -65,7 +65,6 @@ class SliderController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -73,8 +72,8 @@ class SliderController extends Controller
      */
     public function edit(string $id)
     {
-        $slider = Slider::find($id);
-
+        $slider = Slider::findOrFail($id);
+        return view('admin.slider.edit', ['slider' => $slider]);
     }
 
     /**
@@ -82,7 +81,17 @@ class SliderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'banner' => ['nullable', 'image', 'max:2000'],
+            'type' => ['string', 'max:200'],
+            'title' => ['nullable', 'max:200'],
+            'starting_price' => ['max:200'],
+            'btn_url' => ['nullable', 'url'],
+            'serial' => ['nullable'],
+            'status' => ['nullable']
+        ]);
+
+        dd($request->all());
     }
 
     /**

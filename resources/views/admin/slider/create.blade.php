@@ -50,7 +50,7 @@
                                     </select>
                                 </div>
 
-                                <input type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" value>Create</button>
                             </form>
                         </div>
                         <div class="card-footer text-right">
