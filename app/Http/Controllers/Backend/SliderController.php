@@ -91,7 +91,18 @@ class SliderController extends Controller
             'status' => ['nullable']
         ]);
 
-        dd($request->all());
+        $slider = Slider::findOrFail($id);
+        $imagePath = $this->updateImage($request, 'banner','image', $slider->banner);
+        $slider->banner = empty(!$imagePath) ? $imagePath : $slider->banner;
+        $slider->type = $request->type;
+        $slider->title = $request->title;
+        $slider->starting_price = $request->starting_price;
+        $slider->btn_url = $request->btn_url;
+        $slider->serial = $request->serial;
+        $slider->status = $request->status;
+        $slider->save();
+        toastr()->success('Update Successfull');
+        return redirect()->route('admin.slider.index');
     }
 
     /**
@@ -99,9 +110,10 @@ class SliderController extends Controller
      */
     public function destroy(string $id)
     {
-        dd('aa');
-        Slider::find($id)->delete();
+        $slider = Slider::find($id);
+        $this->deleteImage($slider->banner);
+        $slider->delete();
         toastr()->success('Slider delete');
-        return redirect()->back();
+        return response(['status' => 'success', 'message' => 'Deleted Successfull']);
     }
 }

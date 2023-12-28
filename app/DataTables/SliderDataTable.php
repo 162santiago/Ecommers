@@ -24,7 +24,7 @@ class SliderDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
                  $btnEdit = "<a class='btn btn-primary ml-1' href='".route('admin.slider.edit', $query->id)."'><i class='far fa-edit'></i></a>";
-                 $btnDelete = "<a class='btn btn-danger' href='".route('admin.slider.destroy', $query->id)."'><i class='fa-solid fa-trash'></i></a>";
+                 $btnDelete = "<a class='btn btn-danger delete-item' href='".route('admin.slider.destroy', $query->id)."'><i class='fa-solid fa-trash'></i></a>";
                  return $btnEdit . $btnDelete;
             })
             ->addColumn('banner', function($query){
@@ -74,6 +74,7 @@ class SliderDataTable extends DataTable
             Column::make('title'),
             Column::make('starting_price'),
             Column::make('type'),
+            Column::make('serial'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
