@@ -20,7 +20,9 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="">Icon</label>
-                                    <input type="text" placeholder="" name="icon" class="form-control">
+                                    <div>
+                                        <button class="btn btn-dark" data-selected-class="btn-danger" data-unselected-class="btn-dark" role="iconpicker" name="icon"></button>
+                                    </div>
                                 </div>
                                 <div class="form-group" >
                                     <label for="">Name</label>
