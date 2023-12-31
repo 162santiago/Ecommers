@@ -24,14 +24,14 @@ class SliderDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
                  $btnEdit = "<a class='btn btn-primary ml-1' href='".route('admin.slider.edit', $query->id)."'><i class='far fa-edit'></i></a>";
-                 $btnDelete = "<a class='btn btn-danger delete-item' href='".route('admin.slider.destroy', $query->id)."'><i class='fa-solid fa-trash'></i></a>";
+                 $btnDelete = "<a class='btn btn-danger delete-item' href='".route('admin.slider.destroy', $query->id)."'><i class='far fa-trash-alt'></i></a>";
                  return $btnEdit . $btnDelete;
             })
             ->addColumn('banner', function($query){
-                return $img = "<img width='100px' src='".asset($query->banner)."'> </img>";
+                return $img = "<i style='font-size:40px' class='".asset($query->banner)."'> </i>";
             })
             ->addColumn('status', function($query){
-                $active = '<i class="badge badge-succes">Active</i>';
+                $active = '<i class="badge badge-success">Active</i>';
                 $inactive = '<i class="badge badge-danger">Inactive</i>';
                 if ($query->status == 1) {
                     return $active;
@@ -62,7 +62,7 @@ class SliderDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
