@@ -32,7 +32,7 @@
                                     <label for="">Status</label>
                                     <select id="" name="status">
                                         <option value="1">Active</option>
-                                        <option value="0">Inacive</option>
+                                        <option value="0">Inactive</option>
                                     </select>
                                 </div>
                                 <button class="btn btn-primary" type="submit">Create</button>
