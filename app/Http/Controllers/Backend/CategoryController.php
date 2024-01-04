@@ -93,4 +93,6 @@ class CategoryController extends Controller
         $category->delete();
         return response(['status' => 'success', 'Deleted Succesfull!!']);
     }
+
+    public function changeStatus(Request $request, )
 }
