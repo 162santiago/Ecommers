@@ -35,13 +35,14 @@
                 let isChecked = $(this).is(':checked');
                 let id = $(this).data('id');
                 $.ajax({
-                    url : "{{ route('admin.category.change.status') }}",
+                    url : "{{ route('admin.category.change-status') }}",
                     method : 'PUT',
-                    data:{ isChecked : isChecked,
+                    data:
+                    { status : isChecked,
                     id : id
                 },
-                succes:function(data){
-                    console.log(data);
+                success:function(data){
+                    toastr.success(data.message)
                 },
                 error: function(xhr,status,error){
                     console.log(error);
