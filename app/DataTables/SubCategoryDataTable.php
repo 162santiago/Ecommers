@@ -22,7 +22,29 @@ class SubCategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'subcategory.action')
+            ->addColumn('action', function($query){
+                $btnEdit = "<a class='btn btn-primary ml-1' href='" . route('admin.sub-category.edit', $query->id) . "'><i class='far fa-edit'></i></a>";
+                $btnDelete = "<a class='btn btn-danger delete-item' href='" . route('admin.sub-category.destroy', $query->id) . "'><i class='far fa-trash-alt'></i></a>";
+                return $btnEdit . $btnDelete;
+            })
+            ->addColumn('category', function($query){
+                return $query->category->name;
+            })
+            ->addColumn('status', function($query){
+                if ($query->status ==1) {
+                    $button = '<label class="custom-switch mt-2">
+                    <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+                    <span class="custom-switch-indicator"></span>
+                    </label>';
+                }else{
+                    $button = '<label class="custom-switch mt-2">
+                    <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+                    <span class="custom-switch-indicator"></span>
+                    </label>';
+                }
+                return $button;
+            })
+            ->rawColumns(['action', 'category', 'status'])
             ->setRowId('id');
     }
 
@@ -44,7 +66,7 @@ class SubCategoryDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -62,16 +84,15 @@ class SubCategoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('id'),
+            Column::make('category'),
+            Column::make('name'),
+            Column::make('status'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('icon'),
-            Column::make('slug'),
-            Column::make('name'),
-            Column::make('status'),
         ];
     }
 

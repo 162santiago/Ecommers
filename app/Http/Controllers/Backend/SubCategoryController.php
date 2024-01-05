@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\SubCategoryDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Str;
 
 class SubCategoryController extends Controller
 {
@@ -21,7 +24,8 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        return view('admin.sub-category.create', ['categories' => $category]);
     }
 
     /**
@@ -29,7 +33,20 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_id' => ['required'],
+            'name' => ['required', 'max:200','unique:sub_categories,name'],
+            'status' => ['required']
+        ]);
+        $subcategory = new SubCategory();
+        $subcategory->category_id = $request->category_id;
+        $subcategory->name = $request->name;
+        $subcategory->slug = Str::slug($request->name);
+        $subcategory->status = $request->status;
+        $subcategory->save();
+
+        toastr()->success('Sub Category Create Succesfull');
+        return redirect()->route('admin.sub-category.index');
     }
 
     /**
@@ -37,7 +54,7 @@ class SubCategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -45,7 +62,9 @@ class SubCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = Category::all();
+        $subcategory = SubCategory::findOrFail($id);
+        return view('admin.sub-category.edit', ['categories' => $categories, 'subcategory' => $subcategory]);
     }
 
     /**
@@ -53,7 +72,20 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'category_id' => ['required'],
+            'name' => ['required', 'max:200','unique:sub_categories,name,'.$id],
+            'status' => ['required']
+        ]);
+
+        $subcategory = SubCategory::findOrFail($id);
+        $subcategory->category_id = $request->category_id;
+        $subcategory->name = $request->name;
+        $subcategory->slug = Str::slug($request->name);
+        $subcategory->status = $request->status;
+        $subcategory->save();
+        toastr()->success('Sub Category Update Succesfull');
+        return redirect()->route('admin.sub-category.index');
     }
 
     /**
@@ -61,6 +93,16 @@ class SubCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subcategory = SubCategory::findOrFail($id);
+        $subcategory->delete();
+        toastr()->success('Sub Category delete');
+        return response(['status' => 'success', 'message' => 'Deleted Successfull']);
+    }
+
+    public function changeStatus(Request $request){
+        $category = Category::findOrFail($request->id);
+        $category->status = $request->status=='true' ? 1 :0;
+        $category->save();
+        return response(['message' => 'Status has been update']);
     }
 }
