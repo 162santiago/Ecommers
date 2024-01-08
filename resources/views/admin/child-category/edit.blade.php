@@ -16,7 +16,7 @@
                             <h4>Edit Sub Category</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.sub-category.update', $subcategory->id) }}" method="POST">
+                            <form action="{{ route('admin.child-category.update', $subcategory->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group col-12" >

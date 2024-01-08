@@ -2,12 +2,10 @@
 
 @section('content')
     <!-- Main Content -->
-
     <section class="section">
         <div class="section-header">
             <h1>Sub Category</h1>
         </div>
-
         <div class="section-body">
             <div class="row">
                 <div class="col-12 ">
@@ -16,23 +14,23 @@
                             <h4>Create Sub Category</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.sub-category.store') }}" method="POST">
+                            <form action="{{ route('admin.child-category.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group col-12" >
                                     <label for="">Name</label>
                                     <input type="text" placeholder="" name="name" class="form-control">
                                 </div>
                                 <div class="form-group col-12">
-                                    <label for="">Sub Category</label>
-                                    <select id="" name="category_id" class="form-control">
-                                    </select>
-                                </div>
-                                <div class="form-group col-12">
                                     <label for="">Category</label>
-                                    <select id="" name="category_id" class="form-control">
+                                    <select id="" name="category_id" class="form-control main-category">
                                         @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label for="">Sub Category</label>
+                                    <select id="" name="category_id" class="form-control">
                                     </select>
                                 </div>
                                 <div class="form-group col-12">
@@ -51,3 +49,27 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $('body').on('change', '.main-category', function(e) {
+            let id = $(this).val();
+            $.ajax({
+                method:"GET",
+                url:"",
+                data:{
+                    id:id
+                },
+                succes:function(data){
+                    console.log(data);
+                },
+                error:function(xhr,status,error) {
+                    console.log(error);
+                }
+
+    })
+        })
+    })
+</script>
+@endpush

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\ChildCategoryDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ChildCategoryController extends Controller
@@ -21,7 +22,8 @@ class ChildCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.child-category.edit')
+        $categories = Category::all();
+        return view('admin.child-category.create', ['categories' => $categories]);
     }
 
     /**
