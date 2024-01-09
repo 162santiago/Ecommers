@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="">Category</label>
-                                    <select id="" name="category_id" class="form-control main-category">
+                                    <select id="" name="category" class="form-control main-category">
                                         @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
@@ -30,7 +30,8 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="">Sub Category</label>
-                                    <select id="" name="category_id" class="form-control">
+                                    <select id="" name="sub_category" class="form-control sub-category">
+                                        <option value="">Select</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-12">
@@ -57,12 +58,17 @@
             let id = $(this).val();
             $.ajax({
                 method:"GET",
-                url:"",
+                url:"{{ route('admin.get-subcategories') }}",
                 data:{
                     id:id
                 },
-                succes:function(data){
+                success:function(data){
+
                     console.log(data);
+                    $('.sub-category').html('<option value="">Select</option>')
+                    $.each(data, function(i,item){
+                        $('.sub-category').append(`<option value="${item.id}">${item.name}</option>`)
+                    })
                 },
                 error:function(xhr,status,error) {
                     console.log(error);

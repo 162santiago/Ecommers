@@ -100,7 +100,7 @@ class SubCategoryController extends Controller
     }
 
     public function changeStatus(Request $request){
-        $category = Category::findOrFail($request->id);
+        $category = SubCategory::findOrFail($request->id);
         $category->status = $request->status=='true' ? 1 :0;
         $category->save();
         return response(['message' => 'Status has been update']);
