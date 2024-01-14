@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
@@ -26,3 +27,7 @@ Route::resource('/sub-category', SubCategoryController::class);
 Route::get('get-subcategory', [ChildCategoryController::class, 'getSubCategories'])->name('get-subcategories');
 Route::put('child-category/change-status', [ChildCategoryController::class, 'changeStatus'])->name('child-category.change-status');
 Route::resource('/child-category', ChildCategoryController::class);
+
+/**brand controller */
+Route::put('brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
+Route::resource('/brand', BrandController::class);
