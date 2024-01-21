@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\ProductController;
+use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +38,6 @@ Route::resource('/brand', BrandController::class);
 
 /**vendor profile route controller */
 Route::resource('/vendor-profile', AdminVendorProfileController::class);
+
+/**Products route controller */
+Route::resource('/products', ProductController::class);

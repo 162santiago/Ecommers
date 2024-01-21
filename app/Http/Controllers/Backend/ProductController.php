@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,9 +12,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ProductDataTable $dataTable)
     {
-        //
+        return $dataTable->render('admin.product.index');
     }
 
     /**
@@ -20,7 +22,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
