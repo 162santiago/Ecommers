@@ -40,4 +40,5 @@ Route::resource('/brand', BrandController::class);
 Route::resource('/vendor-profile', AdminVendorProfileController::class);
 
 /**Products route controller */
+Route::get('/product/get-subcategories', [ProductController::class, 'getSubCategories'])->name('product.get-subcategories');
 Route::resource('/products', ProductController::class);

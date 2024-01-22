@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -64,5 +65,11 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    //get all products
+    public function getSubCategories(Request $request){
+        $subCategories = SubCategory::where('category_id' , $request->id)->all();
+        return $subCategories;
     }
 }

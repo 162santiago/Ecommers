@@ -31,7 +31,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group col-12">
                                             <label for="">Category</label>
-                                            <select id="" name="status">
+                                            <select id="" name="status" class="form-control main-category">
                                                 <option>Select</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -42,7 +42,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group col-12">
                                             <label for="">Sub Category</label>
-                                            <select id="" name="status">
+                                            <select id="" name="status" class="form-control sub-category">
                                                 <option>Select</option>
 
                                             </select>
@@ -58,10 +58,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
 
                                 <div class="form-group col-12">
                                     <label for="">Status</label>
@@ -80,3 +76,31 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $('body').on('change', '.main-category', function(e) {
+            let id = $(this).val();
+            $.ajax({
+                method:"GET",
+                url:"{{ route('admin.product.get-subcategories') }}",
+                data:{
+                    id:id
+                },
+                success:function(data){
+
+                    console.log(data);
+                    $('.sub-category').html('<option value="">Select</option>')
+                    $.each(data, function(i,item){
+                        $('.sub-category').append(`<option value="${item.id}">${item.name}</option>`)
+                    })
+                },
+                error:function(xhr,status,error) {
+                    console.log(error);
+                }
+
+    })
+        })
+    })
+</script>
+@endpush
