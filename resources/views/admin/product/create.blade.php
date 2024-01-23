@@ -50,8 +50,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group col-12">
-                                            <label for="">Sub Category</label>
-                                            <select id="" name="status">
+                                            <label for="">Child Category</label>
+                                            <select id="" name="" class="form-control child-category">
                                                 <option>Select</option>
 
                                             </select>
@@ -93,6 +93,31 @@
                     $('.sub-category').html('<option value="">Select</option>')
                     $.each(data, function(i,item){
                         $('.sub-category').append(`<option value="${item.id}">${item.name}</option>`)
+                    })
+                },
+                error:function(xhr,status,error) {
+                    console.log(error);
+                }
+
+    })
+        })
+    })
+
+     $(document).ready(function(){
+        $('body').on('change', '.sub-category', function(e) {
+            let id = $(this).val();
+            $.ajax({
+                method:"GET",
+                url:"{{ route('admin.product.child-subcategories') }}",
+                data:{
+                    id:id
+                },
+                success:function(data){
+
+                    console.log(data);
+                    $('.child-category').html('<option value="">Select</option>')
+                    $.each(data, function(i,item){
+                        $('.child-category').append(`<option value="${item.id}">${item.name}</option>`)
                     })
                 },
                 error:function(xhr,status,error) {
