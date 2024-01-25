@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('brand_id');
             $table->integer('qty');
             $table->text('short_description');
-            $table->text('log_description');
+            $table->text('long_description');
             $table->text('video_link')->nullable();
             $table->string('sku')->nullable();
             $table->double('price');
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->boolean('status');
             $table->integer('is_approved')->default(0);
             $table->string('seo_title')->nullable();
-            $table->text('seo_desciption')->nullable();
+            $table->text('seo_description')->nullable();
 
 
 
