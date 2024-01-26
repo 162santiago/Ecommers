@@ -88,14 +88,16 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="">Offert Start Price</label>
-                                            <input type="text" placeholder="" name="offer_start_date" class="form-control datepicker">
+                                            <input type="text" placeholder="" name="offer_start_date"
+                                                class="form-control datepicker">
                                         </div>
                                     </div>
 
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="">Offert End Price</label>
-                                            <input type="text" placeholder="" name="offer_end_date" class="form-control datepicker">
+                                            <input type="text" placeholder="" name="offer_end_date"
+                                                class="form-control datepicker">
                                         </div>
                                     </div>
                                 </div>
@@ -120,42 +122,18 @@
                                     <textarea type="text" placeholder="" name="long_description" class="form-control summernote"></textarea>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group col-12">
-                                            <label for="">Is Top</label>
-                                            <select id="" name="is_top"
-                                                class="form-control">
-                                                <option>Select</option>
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-4">
-                                        <div class="form-group col-12">
-                                            <label for="">Is Best</label>
-                                            <select id="" name="is_best"
-                                                class="form-control ">
-                                                <option>Select</option>
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div class="form-group col-12">
+                                    <label for="">Product Ype</label>
+                                    <select id="" name="is_top" class="form-control">
+                                        <option>Select</option>
+                                        <option value="1">Yes</option>
+                                        <option value="new_arrival">New Arrival</option>
+                                        <option value="featured_product">Featured</option>
+                                        <option value="top_product">Top Product</option>
+                                        <option value="best_product">Best Product</option>
 
-                                    <div class="col-md-4">
-                                        <div class="form-group col-12">
-                                            <label for="">Is Featured</label>
-                                            <select id="" name="is_featured"
-                                                class="form-control">
-                                                <option>Select</option>
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -171,8 +149,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group col-12">
                                         <label for="">Status</label>
-                                        <select id="" name="status"
-                                            class="form-control">
+                                        <select id="" name="status" class="form-control">
                                             <option>Select</option>
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
