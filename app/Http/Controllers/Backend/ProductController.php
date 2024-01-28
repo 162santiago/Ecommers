@@ -55,7 +55,7 @@ class ProductController extends Controller
         ]);
 
         $product = new Product();
-        $imagepath = $this->uploadImage($request, 'image', 'image');
+        $imagepath = $this->uploadImage($request, 'thumb_image', 'image');
         $product->thumb_image =$imagepath ;
         $product->name  = $request->name ;
         $product->slug = Str::slug($request->name);
@@ -89,7 +89,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -97,7 +97,10 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('admin.product.edit', compact('product','categories', 'brands'));
     }
 
     /**

@@ -5,9 +5,8 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>Table</h1>
+            <h1>Table Products</h1>
         </div>
-
         <div class="section-body">
             <div class="row">
                 <div class="col-12 ">
@@ -125,9 +124,8 @@
 
                                 <div class="form-group col-12">
                                     <label for="">Product Ype</label>
-                                    <select id="" name="is_top" class="form-control">
+                                    <select id="" name="product_type" class="form-control">
                                         <option>Select</option>
-                                        <option value="1">Yes</option>
                                         <option value="new_arrival">New Arrival</option>
                                         <option value="featured_product">Featured</option>
                                         <option value="top_product">Top Product</option>
